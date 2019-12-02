@@ -228,7 +228,7 @@ In order to obtain a subgraph from a graph stored in a .graphml file, the reader
     
     * The rest of properties are not modified.
  
- 2. Once the configuration is selected, run the file _\<CaseStudy\>SubgraphApp.java_.
+ 2. Once the configuration is selected, set the Java memory heap to 10G and run the file _\<CaseStudy\>SubgraphApp.java_. 
  
  3. After a few seconds, the program will create two files in the main folder of the project: (i) a .graphml file with the resulting subgraph and (ii) a .log file with the execution time consumed to calculate the subgraph in milliseconds.
  
@@ -246,7 +246,7 @@ In order to run a query over a graph or a subgraph, the reader has to follow the
     
     * The rest of properties are not modified.
  
- 2. Once the configuration is selected, run the file _\<CaseStudy\>App.java_.
+ 2. Once the configuration is selected, set the Java memory heap to 10G and  run the file _\<CaseStudy\>App.java_.
  
  3. After a few seconds, the program will return the result of six runs of the query over the .graphml file and the execution time for each run in the console. Moreover, it will create the .log file with all this information.
  
@@ -268,7 +268,7 @@ In order to run the incremental QCB algorithm, the reader has to follow the foll
     
     * Set the property 'incremental' to 'true' to test the _Inc_ architecture. Otherwise, to test the _NInc_ architecture, set this property to 'false'.
  
- 2. Once the configuration is selected, run the file _\<CaseStudy\>IncApp.java_.
+ 2. Once the configuration is selected, set the Java memory heap to 10G and  run the file _\<CaseStudy\>IncApp.java_.
  
  3. After a few seconds, the program will start to show the results of each query execution in the console and the execution time of the experiment. When the program finishes, it will create a .log file with the console information. In this case, the .log file name will have the following structure: _MyLog\<CaseStudyName\>FileIncremental\<nameWeights\>-\<query\>-\<records\>-\<recordsQuery\>.log_.
 
