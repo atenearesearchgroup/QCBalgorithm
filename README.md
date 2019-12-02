@@ -266,7 +266,7 @@ In order to run the incremental QCB algorithm, the reader has to follow the foll
     
     * Change the property 'recordsQuery' to select an α value.
     
-    * The rest of properties are not modified.
+    * Set the property 'incremental' to 'true' to test the _Inc_ architecture. Otherwise, to test the _NInc_ architecture, set this property to 'false'.
  
  2. Once the configuration is selected, run the file _\<CaseStudy\>IncApp.java_.
  
