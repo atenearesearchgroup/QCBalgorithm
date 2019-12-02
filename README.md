@@ -200,13 +200,77 @@ This section gives instructions about how to run the source code in this reposit
    
 ## Configuration and execution
 
-In order to run the case study, the reader has to follow the following steps:
+There are three runnable files for each case study:
+
+* _\<CaseStudy\>_ SubgraphApp.java: it is used to obtain a subgraph from a .graphml file using the QCB algorithm.
+* _\<CaseStudy\>_ App.java: it is used to run the query over a .graphml file.
+* _\<CaseStudy\>_ IncApp.java: it is used to run the incremental algorithm starting from a graph stored in a .graphml file with a specific value of α and β.
+
+Note: _\<CaseStudy\>_ must be replaced by _AmazonCase_, _ContestCase_ or _YoutubeCase_ depending on the case study.
+
+### Obtaining a subgraph
+
+In order to obtain a subgraph from a graph, the reader has to follow the following steps:
 
 1. Import Java projects into a workspace.
 
-...
+2. Download the Source Model files from [here](https://drive.google.com/open?id=1QsT5qbZLNie49hF818lQScoaJRoKHjyB) and copy them into the main folder of the project.
+
+4. Open file 'config.properties' located in _\<CaseStudy\>_/src/main/resources, . This file contains the configuration to run the experiments. It is divided into six parts:
+
+    * Configuration parameters: change the property 'file' to indicate the Source Model to be loaded.
+  
+    * Change the property 'query' to indicate the number of query of the case study to be run.
+    
+    * The rest of properties are not modified.
  
- # Experiment Results
+ 5. Once the configuration is selected, run the file _\<CaseStudy\>_ SubgraphApp.java.
+ 
+ 6. After a few seconds, the program will create a .graphml file with the resulting subgraph in the main folder of the project.
+ 
+ ### Running a query over a graph or a subgraph
+
+In order to run a query over a graph or a subgraph, the reader has to follow the following steps:
+
+1. Import Java projects into a workspace.
+
+2. Download the Source Model files from [here](https://drive.google.com/open?id=1QsT5qbZLNie49hF818lQScoaJRoKHjyB) and copy them into the main folder of the project.
+
+4. Open file 'config.properties' located in _\<CaseStudy\>_/src/main/resources, . This file contains the configuration to run the experiments. It is divided into six parts:
+
+    * Configuration parameters: change the property 'file' to indicate the Source Model to be loaded.
+  
+    * Change the property 'query' to indicate the number of query of the case study to be run.
+    
+    * The rest of properties are not modified.
+ 
+ 5. Once the configuration is selected, run the file _\<CaseStudy\>_ App.java.
+ 
+ 6. After a few seconds, the program will return the result of the query six times and the consumed time for each execution in the console.
+ 
+  ### Running the incremental QCB algorithm
+
+In order to run a query over a graph or a subgraph, the reader has to follow the following steps:
+
+1. Import Java projects into a workspace.
+
+2. Download the Source Model files from [here](https://drive.google.com/open?id=1QsT5qbZLNie49hF818lQScoaJRoKHjyB) and copy them into the main folder of the project.
+
+4. Open file 'config.properties' located in _\<CaseStudy\>_/src/main/resources, . This file contains the configuration to run the experiments. It is divided into six parts:
+
+    * Configuration parameters: change the property 'file' to indicate the Source Model to be loaded.
+  
+    * Change the property 'query' to indicate the number of query of the case study to be run.
+    
+    * Change the property 'records' to select a β value.
+    
+    * Change the property 'recordsQuery' to select an α value.
+    
+    * The rest of properties are not modified.
+ 
+ 5. Once the configuration is selected, run the file _\<CaseStudy\>_ App.java.
+ 
+ 6. After a few seconds, the program will start to return the results and the consumed time for each execution in the console.
 
  
 # References
