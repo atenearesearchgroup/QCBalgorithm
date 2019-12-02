@@ -206,6 +206,8 @@ In order to run the experiments, the reader has to follow some previous steps:
 
 2. Download the Source Models for each case study from [here](https://drive.google.com/open?id=1QsT5qbZLNie49hF818lQScoaJRoKHjyB) and copy them into the main folder of the project (folders _AmazonCase_, _ContentCase_ or _YoutubeCase_ depending on the case study).
 
+3. Copy the file _yt\_bb\_detection\_train.csv_ located [here](https://drive.google.com/open?id=1BfIAW0I__1jxIx-K2imW3mRt4HiP6I7T) into the folder _YoutubeCase/src/main/resources_.
+
 Our repository is composed by an artifact for each case study. Moreover, each artifact contains three runnable files in turn:
 
 * _\<CaseStudy\>SubgraphApp.java_: it is used to obtain a subgraph from a graph contained in a .graphml file using the QCB algorithm.
