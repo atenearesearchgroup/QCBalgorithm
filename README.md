@@ -258,7 +258,7 @@ In order to run the incremental QCB algorithm, the reader has to follow the foll
 
 1. Open file 'config.properties' located in _\<CaseStudy\>_/src/main/resources. In this case, the properties to be modified are the following:
 
-    * Configuration parameters: change the property 'file' to indicate the Source Model to be loaded.
+    * Change the property 'file' to indicate the Source Model to be loaded.
     
     * Change the property 'nameWeights' with an informative label. This property will be used to set the name of the .log file. We recommend to set this property according to the name of the source model file. 
   
