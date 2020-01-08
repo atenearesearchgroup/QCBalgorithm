@@ -210,9 +210,9 @@ In order to run the experiments, the reader has to follow some previous steps:
 
 Our repository is composed by an artifact for each case study. Moreover, each artifact contains three runnable files in turn:
 
-* _\<CaseStudy\>SubgraphApp.java_: it is used to obtain a subgraph from a graph contained in a .graphml file using the QCB algorithm.
+* _\<CaseStudy\>SubgraphApp.java_: it is used to obtain a subgraph from a graph contained in a .graphml file using the SDR algorithm.
 * _\<CaseStudy\>App.java_: it is used to run a query over a graph or subgraph contained in a .graphml file.
-* _\<CaseStudy\>IncApp.java_: it is used to run the incremental QCB algorithm starting from a graph stored in a .graphml file with a specific value of α and β.
+* _\<CaseStudy\>IncApp.java_: it is used to run the incremental SDR algorithm starting from a graph stored in a .graphml file with a specific value of α and β.
 
 Note: _\<CaseStudy\>_ must be replaced by _AmazonCase_, _ContestCase_ or _YoutubeCase_ depending on the case study.
 
@@ -252,9 +252,9 @@ In order to run a query over a graph or a subgraph, the reader has to follow the
  
  3. After a few seconds, the program will return the result of six runs of the query over the .graphml file and the execution time for each run in the console. Moreover, it will create the .log file with all this information.
  
-  ### Running the incremental QCB algorithm
+  ### Running the incremental SDR algorithm
 
-In order to run the incremental QCB algorithm, the reader has to follow the following steps:
+In order to run the incremental SDR algorithm, the reader has to follow the following steps:
 
 1. Open file 'config.properties' located in _\<CaseStudy\>_/src/main/resources. In this case, the properties to be modified are the following:
 
