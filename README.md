@@ -1,6 +1,6 @@
 # Improving Query Performance
 
-This repository provides the implementation of all the experiments for the case studies described in our paper entitled "Improving Query Performance of Data Streaming Applications" [1].
+This repository provides the implementation of all the experiments for the case studies described in our paper entitled "Improving Query Performance of Data Streaming Applications" [1]. All results of the experiments are exposed in our website [4].
 
 # Case Studies
 
@@ -282,3 +282,5 @@ In order to run the incremental SDR algorithm, the reader has to follow the foll
 [2] Data from the New Yorker Caption Contest: [https://github.com/nextml/caption-contest-data](https://github.com/nextml/caption-contest-data)
 
 [3] Esteban Real, Jonathon Shlens, Stefano Mazzocchi, Xin Pan, Vincent Vanhoucke: YouTube-BoundingBoxes Dataset [https://research.google.com/youtube-bb/](https://research.google.com/youtube-bb/) 
+
+[4] Gala Barquero, Javier Troya, Antonio Vallecillo: Website of the paper 'Improving Query Performance of Data Streaming Applications'. [http://atenea.lcc.uma.es/projects/SDRAlg.html](http://atenea.lcc.uma.es/projects/SDRAlg.html)
