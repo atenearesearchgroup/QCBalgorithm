@@ -1,6 +1,6 @@
 # Improving Query Performance
 
-This repository provides the implementation of all the experiments for the case studies described in our paper entitled "Improving Query Performance of Data Streaming Applications" [1]. All results of the experiments are exposed in our website [4].
+This repository provides the implementation of all the experiments for the case studies described in our paper entitled "Improving Query Performance of Data Streaming Applications" [1]. All results of the experiments are exposed in our website [2].
 
 # Case Studies
 
@@ -69,7 +69,7 @@ graph.traversal().V().has("idProduct", P.within("product 10", "product 20"))
 
 ## Contest ##
 
-Consider the metamodel of the New Yorker Contest dataset presented in [2]. In this case we are interested in indentifying the following situations of interest:
+Consider the metamodel of the New Yorker Contest dataset presented in [3]. In this case we are interested in indentifying the following situations of interest:
 
 * Q1. RecentPart: taking into account all contests in the system, getting the number of participants that have answered at least one question in a contest in the last month.
 
@@ -128,7 +128,7 @@ __.out("askedTo").out("answers").has("rate", 3))
 
 ## Youtube ##
 
-Consider the metamodel of the YouTube-BoundingBoxes dataset presented in [3]. In this case we are interested in indentifying the following situations of interest:
+Consider the metamodel of the YouTube-BoundingBoxes dataset presented in [4]. In this case we are interested in indentifying the following situations of interest:
 
 * Q1. GetAnimalVideos: obtaining all videos that contains an animal. Animal tags in this dataset are the following: "cat","dog","bird","zebra","cow","bear","horse","giraffe" and "elephant".
 
@@ -279,8 +279,10 @@ In order to run the incremental SDR algorithm, the reader has to follow the foll
 
 [1] Gala Barquero, Javier Troya, Antonio Vallecillo: Improving Query Performance of Data Streaming Applications. Submitted.
 
-[2] Data from the New Yorker Caption Contest: [https://github.com/nextml/caption-contest-data](https://github.com/nextml/caption-contest-data)
+[2] Gala Barquero, Javier Troya, Antonio Vallecillo: Website of the paper 'Improving Query Performance of Data Streaming Applications'. [http://atenea.lcc.uma.es/projects/SDRAlg.html](http://atenea.lcc.uma.es/projects/SDRAlg.html)
 
-[3] Esteban Real, Jonathon Shlens, Stefano Mazzocchi, Xin Pan, Vincent Vanhoucke: YouTube-BoundingBoxes Dataset [https://research.google.com/youtube-bb/](https://research.google.com/youtube-bb/) 
+[3] Data from the New Yorker Caption Contest: [https://github.com/nextml/caption-contest-data](https://github.com/nextml/caption-contest-data)
 
-[4] Gala Barquero, Javier Troya, Antonio Vallecillo: Website of the paper 'Improving Query Performance of Data Streaming Applications'. [http://atenea.lcc.uma.es/projects/SDRAlg.html](http://atenea.lcc.uma.es/projects/SDRAlg.html)
+[4] Esteban Real, Jonathon Shlens, Stefano Mazzocchi, Xin Pan, Vincent Vanhoucke: YouTube-BoundingBoxes Dataset [https://research.google.com/youtube-bb/](https://research.google.com/youtube-bb/) 
+
+
