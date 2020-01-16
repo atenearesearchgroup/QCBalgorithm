@@ -41,7 +41,7 @@ graph.traversal().V()
 .and(__.out("orders").out("contains").has("idProduct", "product 10"),
 __.out("orders").out("contains").has("idProduct", "product 20")).dedup().toList();
 ```
-* Q4. SimilarProductsPopularity: given two specific products that are known to be similar (for example two types of sports socks), get the customers that have ordered one of these products. This query is useful to know the popularity of products with common attributes.
+* Q4. SimProductsPopularity: given two specific products that are known to be similar (for example two types of sports socks), get the customers that have ordered one of these products. This query is useful to know the popularity of products with common attributes.
 
 Gremlin query can be viewed following:
 
@@ -50,7 +50,7 @@ graph.traversal().V()
 .or(__.out("orders").out("contains").has("idProduct", "product 10"),
 __.out("orders").out("contains").has("idProduct", "product 20")).dedup().toList();
 ```
-* Q5. PreferenceCustomer: get the customers that have ordered a specific product that is known for being popular, more than 3 times. With this query we can create offers to the customers according to the products that they buy often. 
+* Q5. PrefCustomer: get the customers that have ordered a specific product that is known for being popular, more than 3 times. With this query we can create offers to the customers according to the products that they buy often. 
 
 Gremlin query can be viewed following:
 
@@ -59,7 +59,7 @@ graph.traversal().V().has("idProduct", "product 10")
 .in("contains").in("orders").groupCount().unfold().where(__.select(values).is(P.gte(3))).toList();
 ```
 
-* Q6. PreferenceCustomerSimilarProducts: given two specific products that are known for being popular and similar, get the customers that have ordered one of these products at least 3 times. Same that Q5, with this query we can create offers to the customers according to the type of products that they buy often.
+* Q6. PrefCustomerSimProducts: given two specific products that are known for being popular and similar, get the customers that have ordered one of these products at least 3 times. Same that Q5, with this query we can create offers to the customers according to the type of products that they buy often.
 
 Gremlin query can be viewed following:
 ```
@@ -71,7 +71,7 @@ graph.traversal().V().has("idProduct", P.within("product 10", "product 20"))
 
 Consider the metamodel of the New Yorker Contest dataset presented in [2]. In this case we are interested in indentifying the following situations of interest:
 
-* Q1. ParticipantRate: taking into account all contests in the system, getting the number of participants that have answered at least one question in a contest in the last month.
+* Q1. RecentPart: taking into account all contests in the system, getting the number of participants that have answered at least one question in a contest in the last month.
 
 Gremlin query can be viewed following:
 
@@ -80,7 +80,7 @@ graph.traversal().V().as("participant")
 .in("askedTo").hasLabel("Question").has("date", P.inside(1467331200000L, 1472688000000L))
 .select("participant").toList();
 ```
-* Q2. ContestParticipation: taking into consideration a specific contest, obtaining all the participants that have just answered one question.
+* Q2. ContestPart: taking into consideration a specific contest, obtaining all the participants that have just answered one question.
 
 Gremlin query can be viewed following:
 
@@ -88,7 +88,7 @@ Gremlin query can be viewed following:
 graph.traversal().V()
 .where(__.in("askedTo").in("formulates").has("idContest", 508)).dedup().toList();
 ```
-* Q3. ChoiceNotChosen: considering a specific caption, counting how many times that caption appeared in a dueling contest question and it was not eventually chosen.
+* Q3. UnchosenCap: considering a specific caption, counting how many times that caption appeared in a dueling contest question and it was not eventually chosen.
 
 Gremlin query can be viewed following:
 
@@ -106,7 +106,7 @@ graph.traversal().V().as("caption")
 .in("contains").out("askedTo").out("answers").has("rate", 3)
 .select("caption").groupCount().unfold().order().by(values, Order.desc).select(keys).limit(1).toList();
 ```
-* Q5. FledParticipant: obtaining all participants that answered one question only. This query might be useful when deleting participant's answers considered as irrelevants.
+* Q5. Abandon: obtaining all participants that answered one question only. This query might be useful when deleting participant's answers considered as irrelevants.
 
 Gremlin query can be viewed following:
 
@@ -114,7 +114,7 @@ Gremlin query can be viewed following:
 graph.traversal().V().has("rate", P.gt(0))
 .in("answers").groupCount().unfold().where(__.select(values).is(P.eq(1))).select(keys).dedup().toList();
 ```
-* Q6. FunniestCaptionUnbiased: same as FunniestCaption, obtaining the highest scored caption taking into account all questions generated by a random algorithm only. In this way, the result of this query is unbiased. 
+* Q6. FunniestCaptionU: same as FunniestCaption, obtaining the highest scored caption taking into account all questions generated by a random algorithm only. In this way, the result of this query is unbiased. 
 
 Gremlin query can be viewed following:
 
@@ -139,7 +139,7 @@ graph.traversal().V()
 .where(__.out("contains").has("className",P.within("cat","dog","bird","zebra","cow","bear","horse","giraffe","elephant"))).toList();
 ```
 
-* Q2. SegmentAbsence: getting the segments where the object is not present in any of its frames.
+* Q2. NotPresent: getting the segments where the object is not present in any of its frames.
 
 Gremlin query can be viewed following:
 
@@ -147,7 +147,7 @@ Gremlin query can be viewed following:
 graph.traversal().V().hasLabel("Segment").not(__.out("contains").has("presence",1)).toList();			
 ```
 
-* Q3. AnimalHumanInteraction: returning all videos that contains at least an animal and a person.
+* Q3. AnimalPerson: returning all videos that contains at least an animal and a person.
 
 Gremlin query can be viewed following:
 
@@ -158,7 +158,7 @@ __.out("contains").has("className",
 P.within("cat","dog","bird","zebra","cow","bear","horse","giraffe","elephant"))).toList();
 ```
 
-* Q4. PresenceAtBeginning: obtaining all videos with the object is present during the first 3 seconds.
+* Q4. PresentSoon: obtaining all videos with the object is present during the first 3 seconds.
 
 Gremlin query can be viewed following:
 
@@ -170,7 +170,7 @@ graph.traversal().V().as("video")
 .has("timestamp", 1000).has("presence", 1)).select("video").dedup().toList();
 ```
 
-* Q5. DomesticAnimalPicture: getting all frames that contains a cat or a dog.
+* Q5. Pets: getting all frames that contains a cat or a dog.
 
 Gremlin query can be viewed following:
 
@@ -180,7 +180,7 @@ graph.traversal().V().has("presence",1)
 __.in("contains").out("tracks").has("className","cat")).toList();
 ```
 
-* Q6. CrowededDetectionVideo: returning all videos where the object is present in at least 10 segments. 
+* Q6. InCast: returning all videos where the object is present in at least 10 segments. 
 
 Gremlin query can be viewed following:
 
