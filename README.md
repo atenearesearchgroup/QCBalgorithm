@@ -268,7 +268,7 @@ In order to run the incremental SDR algorithm, the reader has to follow the foll
     
     * Change the property 'recordsQuery' to select an α value.
     
-    * Set the property 'incremental' to 'true' to test the _Inc_ architecture. Otherwise, to test the _NInc_ architecture, set this property to 'false'.
+    * Set the property 'incremental' to 'true' to test the _SubG_ architecture. Otherwise, to test the _CG_ architecture, set this property to 'false'.
  
  2. Once the configuration is selected, set the Java memory heap to 10G and  run the file _\<CaseStudy\>IncApp.java_.
  
