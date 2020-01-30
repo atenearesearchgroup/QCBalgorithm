@@ -1,6 +1,6 @@
 # Improving Query Performance
 
-This repository provides the implementation of all the experiments for the case studies described in our paper entitled "Improving Query Performance of Data Streaming Applications" [1]. All results of the experiments are exposed in our website [2].
+This repository provides the implementation of all the experiments for the case studies described in our paper entitled "Improving Query Performance of Data Streaming Applications" [1]. All results of the experiments and the metamodels of the case studies are exposed in our website [2].
 
 # Case Studies
 
@@ -8,22 +8,22 @@ This repository provides the implementation of all the experiments for the case 
 
 Consider a simplified version of Amazon ordering service to identify some situations of interest:
 
-* Q1. ProductPopularity: considering a specific product (for example product with *idProduct = 'product 10'*), get the customers that have ordered that product. With this query, we pretend to obtain the popularity of a product inside the Amazon ordering network. This query is implemented as a simple query and conditional query.
+* Q1. ProductPopularity: considering a specific product (e.g., the product with *idProduct = '10'*), return the customers who have ordered it. With this query, the popularity of a product within the Amazon ordering network can be obtained.
 
-Gremlin query for simple implementation can be viewed following:
+Gremlin query with simple pattern can be viewed following:
 
 ```
 graph.traversal().V().as("user").out("orders").out("contains")
 .has("idProduct", "product 10").select("user").dedup().toList();
 ```
 
-Gremlin query for conditional implementation can be viewed following:
+Gremlin query with conditional pattern can be viewed following:
 
 ```
 graph.traversal().V()
 .where(__.out("orders").out("contains").has("idProduct", "product 10")).dedup().toList();
 ```
-* Q2. AlternativeCustomer: given a featured event, for example the Olympic Games, and a list of products that are known to be more frequently ordered than other products, obtain the customers that do not have any order that contains these products. This query can be useful to refine the advertisement campaigns in order to increase their success, recommending its products to the customers that do not ordered them.
+* Q2. AlternativeCustomer: given a list of products that are known to be more frequently ordered than others in a specific event, for example the Olympic Games, obtain the customers who do not have any order that contains them.
 
 Gremlin query can be viewed following:
 
@@ -32,7 +32,7 @@ graph.traversal().V().hasLabel("Customer").as("user")
 .not(__.out("orders").out("contains").has("idProduct", P.within(idProducts))).select("user").dedup().toList();
 ```
 
-* Q3. PackagePopularity: considering two products (for example products with *idProduct = 'product 10'* and *idProduct = 'product 20'*), get the customers that have ordered both products. With this query, we obtain information about the frequency that a customer orders  two specific products. This information can be useful to create recommendations to the customers that have ordered one of these products.
+* Q3. PackagePopularity: considering two products (for example products with *idProduct = '10'* and *idProduct = '20'*), get the customers that have ordered both products. With this query, we obtain information about the frequency that a customer orders  two specific products.
 
 Gremlin query can be viewed following:
 
@@ -50,7 +50,7 @@ graph.traversal().V()
 .or(__.out("orders").out("contains").has("idProduct", "product 10"),
 __.out("orders").out("contains").has("idProduct", "product 20")).dedup().toList();
 ```
-* Q5. PrefCustomer: get the customers that have ordered a specific product that is known for being popular, more than 3 times. With this query we can create offers to the customers according to the products that they buy often. 
+* Q5. PrefCustomer: get the customers who have ordered a concrete product more than 3 times. With this query we can create offers to the customers according to the products that they buy often. 
 
 Gremlin query can be viewed following:
 
@@ -59,7 +59,7 @@ graph.traversal().V().has("idProduct", "product 10")
 .in("contains").in("orders").groupCount().unfold().where(__.select(values).is(P.gte(3))).toList();
 ```
 
-* Q6. PrefCustomerSimProducts: given two specific products that are known for being popular and similar, get the customers that have ordered one of these products at least 3 times. Same that Q5, with this query we can create offers to the customers according to the type of products that they buy often.
+* Q6. PrefCustomerSimProducts: given two specific products that are known for being popular and similar, get the customers that have ordered one of these products at least 3 times. With this query we can create offers to the customers according to the type of products that they buy often.
 
 Gremlin query can be viewed following:
 ```
@@ -69,7 +69,7 @@ graph.traversal().V().has("idProduct", P.within("product 10", "product 20"))
 
 ## Contest ##
 
-Consider the metamodel of the New Yorker Contest dataset presented in [3]. In this case we are interested in indentifying the following situations of interest:
+Consider the metamodel of the New Yorker Contest dataset [3]. In this case we are interested in indentifying the following situations of interest:
 
 * Q1. RecentPart: taking into account all contests in the system, getting the number of participants that have answered at least one question in a contest in the last month.
 
@@ -128,7 +128,7 @@ __.out("askedTo").out("answers").has("rate", 3))
 
 ## Youtube ##
 
-Consider the metamodel of the YouTube-BoundingBoxes dataset presented in [4]. In this case we are interested in indentifying the following situations of interest:
+Consider the metamodel of the YouTube-BoundingBoxes dataset [4]. In this case we are interested in indentifying the following situations of interest:
 
 * Q1. GetAnimalVideos: obtaining all videos that contains an animal. Animal tags in this dataset are the following: "cat","dog","bird","zebra","cow","bear","horse","giraffe" and "elephant".
 
@@ -208,11 +208,12 @@ In order to run the experiments, the reader has to follow some previous steps:
 
 3. Copy the file _yt\_bb\_detection\_train.csv_ located [here](https://drive.google.com/open?id=1BfIAW0I__1jxIx-K2imW3mRt4HiP6I7T) into the folder _YoutubeCase/src/main/resources_.
 
-Our repository is composed by an artifact for each case study. Moreover, each artifact contains three runnable files in turn:
+Our repository is composed by an artifact for each case study. Moreover, each artifact contains four runnable files in turn:
 
 * _\<CaseStudy\>SubgraphApp.java_: it is used to obtain a subgraph from a graph contained in a .graphml file using the SDR algorithm.
 * _\<CaseStudy\>App.java_: it is used to run a query over a graph or subgraph contained in a .graphml file.
 * _\<CaseStudy\>IncApp.java_: it is used to run the incremental SDR algorithm starting from a graph stored in a .graphml file with a specific value of α and β.
+* _\<CaseStudy\>DecApp.java_: it is also used to run the incremental SDR algorithm starting from a graph stored in a .graphml file. However, in this case β value represents the number of objects (orders, answers or segments for Amazon, Contest and Youtube case studies respectively) to be removed from the graph. Therefore, this file does not increase the graph size but decrease it. 
 
 Note: _\<CaseStudy\>_ must be replaced by _AmazonCase_, _ContestCase_ or _YoutubeCase_ depending on the case study.
 
@@ -232,7 +233,7 @@ In order to obtain a subgraph from a graph stored in a .graphml file, the reader
  
  2. Once the configuration is selected, set the Java memory heap to 10G and run the file _\<CaseStudy\>SubgraphApp.java_. 
  
- 3. After a few seconds, the program will create two files in the main folder of the project: (i) a .graphml file with the resulting subgraph and (ii) a .log file with the execution time consumed to calculate the subgraph in milliseconds.
+ 3. After a few seconds, the program will create two files in the main folder of the project: (i) a .graphml file with the resulting subgraph and (ii) a .log file that contains the execution time consumed to calculate the subgraph in milliseconds.
  
  ### Running a query over a graph or a subgraph
 
@@ -270,10 +271,9 @@ In order to run the incremental SDR algorithm, the reader has to follow the foll
     
     * Set the property 'incremental' to 'true' to test the _SubG_ architecture. Otherwise, to test the _CG_ architecture, set this property to 'false'.
  
- 2. Once the configuration is selected, set the Java memory heap to 10G and  run the file _\<CaseStudy\>IncApp.java_.
+ 2. Once the configuration is selected, set the Java memory heap to 10G and  run the file _\<CaseStudy\>IncApp.java_ or _\<CaseStudy\>DecApp.java_, depending on whether you want to add records or delete objects.
  
- 3. After a few seconds, the program will start to show the results of each query execution in the console and the execution time of the experiment. When the program finishes, it will create a .log file with the console information. In this case, the .log file name will have the following structure: _MyLog\<CaseStudyName\>FileIncremental\<nameWeights\>-\<query\>-\<records\>-\<recordsQuery\>.log_.
-
+ 3. After a few seconds, the program will start to show the results of each query execution in the console and the execution time of the experiment. When the program finishes, it will create a .log file with the console information. In this case, the .log file name will have the following structure: _MyLog\<CaseStudyName\>FileIncremental\<nameWeights\>-\<query\>-\<records\>-\<recordsQuery\>.log_ or _MyLog\<CaseStudyName\>FileDecremental\<nameWeights\>-\<query\>-\<records\>-\<recordsQuery\>.log_, depending on the case.
  
 # References
 
