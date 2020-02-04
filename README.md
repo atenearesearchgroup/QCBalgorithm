@@ -10,7 +10,7 @@ Consider a simplified version of Amazon ordering service to identify some situat
 
 * Q1. ProductPopularity: considering a specific product (e.g., the product with *idProduct = '10'*), return the customers who have ordered it. With this query, the popularity of a product within the Amazon ordering network can be obtained.
 
-Gremlin query with simple pattern can be viewed following:
+Gremlin query with simple pattern is shown below:
 
 ```
 graph.traversal().V().as("user").out("orders").out("contains")
@@ -34,7 +34,7 @@ graph.traversal().V().hasLabel("Customer").as("user")
 
 * Q3. PackagePopularity: considering two products (for example products with *idProduct = '10'* and *idProduct = '20'*), get the customers that have ordered both products. With this query, we obtain information about the frequency that a customer orders  two specific products.
 
-Gremlin query can be viewed following:
+Gremlin query is shown below:
 
 ```
 graph.traversal().V()
@@ -61,7 +61,7 @@ graph.traversal().V().has("idProduct", "product 10")
 
 * Q6. PrefCustomerSimProducts: given two specific products that are known for being popular and similar, get the customers that have ordered one of these products at least 3 times. With this query we can create offers to the customers according to the type of products that they buy often.
 
-Gremlin query can be viewed following:
+Gremlin query is shown below:
 ```
 graph.traversal().V().has("idProduct", P.within("product 10", "product 20"))
 .in("contains").in("orders").groupCount().unfold().where(__.select(values).is(P.gte(3))).toList();
@@ -73,7 +73,7 @@ Consider the metamodel of the New Yorker Contest dataset [3]. In this case we ar
 
 * Q1. RecentPart: taking into account all contests in the system, getting the number of participants that have answered at least one question in a contest in the last month.
 
-Gremlin query can be viewed following:
+Gremlin query is shown below:
 
 ```
 graph.traversal().V().as("participant")
@@ -90,7 +90,7 @@ graph.traversal().V()
 ```
 * Q3. UnchosenCap: considering a specific caption, counting how many times that caption appeared in a dueling contest question and it was not eventually chosen.
 
-Gremlin query can be viewed following:
+Gremlin query is shown below:
 
 ```
 graph.traversal().V()
@@ -132,7 +132,7 @@ Consider the metamodel of the YouTube-BoundingBoxes dataset [4]. In this case we
 
 * Q1. GetAnimalVideos: obtaining all videos that contains an animal. Animal tags in this dataset are the following: "cat","dog","bird","zebra","cow","bear","horse","giraffe" and "elephant".
 
-Gremlin query can be viewed following:
+Gremlin query is shown below:
 
 ```
 graph.traversal().V()
@@ -141,7 +141,7 @@ graph.traversal().V()
 
 * Q2. NotPresent: getting the segments where the object is not present in any of its frames.
 
-Gremlin query can be viewed following:
+Gremlin query is shown below:
 
 ```
 graph.traversal().V().hasLabel("Segment").not(__.out("contains").has("presence",1)).toList();			
