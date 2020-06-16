@@ -71,7 +71,7 @@ graph.traversal().V().has("idProduct", P.within("product 10", "product 20"))
 
 Consider the metamodel of the New Yorker Contest dataset [3]. In this case we are interested in indentifying the following situations of interest:
 
-* Q1. RecentPart: taking into account all contests in the system, getting the number of participants that have answered at least one question in a contest in the last month.
+* Q1. RecentPart: taking into account all contests in the system, getting the number of participants who have answered at least one question in a contest in the last month.
 
 Gremlin query is shown below:
 
@@ -80,7 +80,7 @@ graph.traversal().V().as("participant")
 .in("askedTo").hasLabel("Question").has("date", P.inside(1467331200000L, 1472688000000L))
 .select("participant").toList();
 ```
-* Q2. ContestPart: taking into consideration a specific contest, obtaining all the participants that have just answered one question.
+* Q2. ContestPart: taking into consideration a specific contest, obtaining all the participants who have only answered one question.
 
 Gremlin query can be viewed following:
 
@@ -88,7 +88,7 @@ Gremlin query can be viewed following:
 graph.traversal().V()
 .where(__.in("askedTo").in("formulates").has("idContest", 508)).dedup().toList();
 ```
-* Q3. UnchosenCap: considering a specific caption, counting how many times that caption appeared in a dueling contest question and it was not eventually chosen.
+* Q3. UnchosenCap: considering a specific caption, counting how many times a caption appeared in a dueling contest question and it was not eventually chosen.
 
 Gremlin query is shown below:
 
@@ -97,7 +97,7 @@ graph.traversal().V()
 .and(__.out("contains").has("idCaption", 61),
 __.in("answers").out("chooses").has("idCaption", P.neq(61))).toList();
 ```
-* Q4. FunniestCaption: getting the highest scored caption in a cardinal contest. The highest scored caption is considered the most voted caption tagged as 'funny'.
+* Q4. FunniestCaption: getting the highest scored caption in a cardinal contest. The highest scored caption is considered as the most voted caption tagged as 'funny'.
 
 Gremlin query can be viewed following:
 
@@ -106,7 +106,7 @@ graph.traversal().V().as("caption")
 .in("contains").out("askedTo").out("answers").has("rate", 3)
 .select("caption").groupCount().unfold().order().by(values, Order.desc).select(keys).limit(1).toList();
 ```
-* Q5. Abandon: obtaining all participants that answered one question only. This query might be useful when deleting participant's answers considered as irrelevants.
+* Q5. Abandon: obtaining all participants that answered one question only. This query might be useful when deleting participants' answers considered as irrelevants.
 
 Gremlin query can be viewed following:
 
@@ -130,7 +130,7 @@ __.out("askedTo").out("answers").has("rate", 3))
 
 Consider the metamodel of the YouTube-BoundingBoxes dataset [4]. In this case we are interested in indentifying the following situations of interest:
 
-* Q1. GetAnimalVideos: obtaining all videos that contains an animal. Animal tags in this dataset are the following: "cat","dog","bird","zebra","cow","bear","horse","giraffe" and "elephant".
+* Q1. GetAnimalVideos: obtaining all videos that contain an animal. Animal tags in this dataset are the following: "cat","dog","bird","zebra","cow","bear","horse","giraffe" and "elephant".
 
 Gremlin query is shown below:
 
@@ -147,7 +147,7 @@ Gremlin query is shown below:
 graph.traversal().V().hasLabel("Segment").not(__.out("contains").has("presence",1)).toList();			
 ```
 
-* Q3. AnimalPerson: returning all videos that contains at least an animal and a person.
+* Q3. AnimalPerson: returning all videos that contain at least an animal and a person.
 
 Gremlin query can be viewed following:
 
@@ -170,7 +170,7 @@ graph.traversal().V().as("video")
 .has("timestamp", 1000).has("presence", 1)).select("video").dedup().toList();
 ```
 
-* Q5. Pets: getting all frames that contains a cat or a dog.
+* Q5. Pets: getting all frames that contain a cat or a dog.
 
 Gremlin query can be viewed following:
 
